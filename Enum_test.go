@@ -5,12 +5,12 @@
 // Credits: Egon https://groups.google.com/d/msg/golang-nuts/fCdBSRNNUY8/P45qC_03LoAJ
 ////////////////////////////////////////////////////////////////////////////
 
-package main
+package enum_test
 
 import (
-  "fmt"
+	"fmt"
 
-  "github.com/suntong/enum"
+	"github.com/suntong/enum"
 )
 
 var (
@@ -19,7 +19,7 @@ var (
 )
 
 type Example struct {
-	Enum
+	enum.Enum
 }
 
 // for standalone test, change package to main and the next func def to,
@@ -31,25 +31,20 @@ func Example_output() {
 	fmt.Printf("%d\t%d\n", Alpha, Alpha+1)
 	fmt.Printf("%+v\t%+v\n", Example{Beta - 1}, Example{Alpha + 1})
 	fmt.Println("=======")
-	fmt.Printf("%+v\n", enums)
-	fmt.Println("=======")
 	if a, ok := enum.Get("Alpha"); ok {
 		fmt.Printf("%d\n", a)
 	}
 	if b, ok := enum.Get("Beta"); ok {
 		fmt.Printf("%d: %+v\n", b, Example{b})
 	}
-  
-  // Output:
-  // Alpha
-  // Beta
-  // =======
-  // 0	1
-  // Alpha	Beta
-  // =======
-  // [Alpha Beta]
-  // =======
-  // 0
-  // 1: Beta
-}
 
+	// Output:
+	// Alpha
+	// Beta
+	// =======
+	// 0	1
+	// Alpha	Beta
+	// =======
+	// 0
+	// 1: Beta
+}
