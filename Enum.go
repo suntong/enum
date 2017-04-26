@@ -2,32 +2,34 @@
 // Package: Enum
 // Purpose: Go Enum and its string representation lib
 // Authors: Tong Sun (c) 2017, All rights reserved
-// Credits: Egon https://groups.google.com/d/msg/golang-nuts/fCdBSRNNUY8/P45qC_03LoAJ
+// Credits: https://groups.google.com/d/msg/golang-nuts/fCdBSRNNUY8/P45qC_03LoAJ
 ////////////////////////////////////////////////////////////////////////////
 
 package enum
 
-var enums []string
-
-// The Enum is the type to hold enumerables
-type Enum int
-
-// String turns Enum to its string form
-func (e Enum) String() string {
-	return enums[int(e)]
+// Enum holds the enumerables
+type Enum struct {
+	enums []string
 }
 
-// Ciota converts string to enumerable, similar to Go's iota
-func Ciota(s string) Enum {
-	enums = append(enums, s)
-	return Enum(len(enums) - 1)
+// type Enum int
+
+// String turns Enum to its string form
+func (e Enum) String(v int) string {
+	return e.enums[v]
+}
+
+// Iota converts string to enumerable, similar to Go's iota
+func (e *Enum) Iota(s string) int {
+	e.enums = append(e.enums, s)
+	return len(e.enums) - 1
 }
 
 // Get lookup the given string for interal enumerable
-func Get(s string) (Enum, bool) {
-	for ii, vv := range enums {
+func (e Enum) Get(s string) (int, bool) {
+	for ii, vv := range e.enums {
 		if vv == s {
-			return Enum(ii), true
+			return ii, true
 		}
 	}
 	return -1, false
