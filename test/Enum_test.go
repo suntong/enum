@@ -4,27 +4,24 @@
 // Authors: Tong Sun (c) 2017-2021, All rights reserved
 ////////////////////////////////////////////////////////////////////////////
 
-package enum_test
+package test
 
 import (
 	"fmt"
 
-	"gopkg.in/suntong/enum.v1"
+	"github.com/suntong/enum"
 )
 
 var (
-	// Note this is a v1 example, i.e.,
-	// the enum variables are declared,
-	// instead of defined with `enum.NewEnum()`
-	example enum.Enum
+	example = enum.NewEnum()
 	Alpha   = example.Iota("Alpha")
 	Beta    = example.Iota("Beta")
 
-	weekday enum.Enum
+	weekday = enum.NewEnum()
 	Sunday  = weekday.Iota("Sunday")
 	Monday  = weekday.Iota("Monday")
 
-	wkday enum.Enum
+	wkday = enum.NewEnum()
 	Suday = wkday.Iota("Su")
 	Moday = wkday.Iota("Mo")
 	Tuday = wkday.Iota("Tu")

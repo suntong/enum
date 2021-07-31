@@ -9,10 +9,15 @@ package enum
 
 // Enum holds the enumerables
 type Enum struct {
-	enums []string
+	enums map[int]string
+	iota  int
 }
 
 // type Enum int
+
+func NewEnum() Enum {
+	return Enum{make(map[int]string), 0}
+}
 
 // String turns Enum to its string form
 func (e Enum) String(v int) string {
@@ -21,8 +26,10 @@ func (e Enum) String(v int) string {
 
 // Iota converts string to enumerable, similar to Go's iota
 func (e *Enum) Iota(s string) int {
-	e.enums = append(e.enums, s)
-	return len(e.enums) - 1
+	r := e.iota
+	e.iota++
+	e.enums[r] = s
+	return r
 }
 
 // Get lookup the given string for interal enumerable
