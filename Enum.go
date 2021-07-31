@@ -32,6 +32,12 @@ func (e *Enum) Iota(s string) int {
 	return r
 }
 
+// IotaAt converts string to the enumerable given as the at value
+func (e *Enum) IotaAt(s string, at int) int {
+	e.iota = at
+	return e.Iota(s)
+}
+
 // Get lookup the given string for interal enumerable
 func (e Enum) Get(s string) (int, bool) {
 	for ii, vv := range e.enums {
