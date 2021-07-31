@@ -24,6 +24,12 @@ func (e Enum) String(v int) string {
 	return e.enums[v]
 }
 
+// Exist returns Enum's string form if exist
+func (e Enum) Exist(v int) (string, bool) {
+	elem, ok := e.enums[v]
+	return elem, ok
+}
+
 // Iota converts string to enumerable, similar to Go's iota
 func (e *Enum) Iota(s string) int {
 	r := e.iota

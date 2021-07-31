@@ -40,6 +40,7 @@ var (
 	MsgtypeLocation  = wxType.IotaAt("地理位置消息", 48)
 	MsgtypeApp       = wxType.IotaAt("APP消息", 49)
 	MsgtypeVoipmsg   = wxType.IotaAt("VOIP消息", 50)
+	MsgtypeSys       = wxType.IotaAt("系统消息", 10000)
 )
 
 // for standalone test, change package to main and the next func def to,
@@ -71,7 +72,24 @@ func Example_output() {
 	for _, wxt := range []int{
 		MsgtypeText, MsgtypeImage, MsgtypeVoice, MsgtypeSharecard, MsgtypeVideo,
 		MsgtypeEmoticon, MsgtypeLocation, MsgtypeApp, MsgtypeVoipmsg} {
-		fmt.Printf("收到%s(type %d)\n", wxType.String(wxt), wxt)
+		fmt.Printf("收到一条%s(type %d)\n", wxType.String(wxt), wxt)
+	}
+	fmt.Println("=======")
+	for _, wxt := range []int{10000, 51} {
+		wxtstr, ok := wxType.Exist(wxt)
+		if ok {
+			fmt.Printf("收到一条%s(type %d)\n", wxtstr, wxt)
+		} else {
+			fmt.Printf("收到一条未知消息(type %d):%s\n", wxt, wxtstr)
+		}
+	}
+	fmt.Println("=======")
+	for _, wxt := range []int{10000, 51} {
+		wxtstr, ok := wxType.Exist(wxt)
+		if !ok {
+			wxtstr = "未知消息"
+		}
+		fmt.Printf("收到一条%s(type %d)\n", wxtstr, wxt)
 	}
 	// Output:
 	// Alpha
@@ -90,13 +108,19 @@ func Example_output() {
 	// Fr: 5
 	// Sa: 6
 	// =======
-	// 收到文本消息(type 1)
-	// 收到图片消息(type 3)
-	// 收到语音消息(type 34)
-	// 收到名片消息(type 42)
-	// 收到视频消息(type 43)
-	// 收到表情消息(type 47)
-	// 收到地理位置消息(type 48)
-	// 收到APP消息(type 49)
-	// 收到VOIP消息(type 50)
+	// 收到一条文本消息(type 1)
+	// 收到一条图片消息(type 3)
+	// 收到一条语音消息(type 34)
+	// 收到一条名片消息(type 42)
+	// 收到一条视频消息(type 43)
+	// 收到一条表情消息(type 47)
+	// 收到一条地理位置消息(type 48)
+	// 收到一条APP消息(type 49)
+	// 收到一条VOIP消息(type 50)
+	// =======
+	// 收到一条系统消息(type 10000)
+	// 收到一条未知消息(type 51):
+	// =======
+	// 收到一条系统消息(type 10000)
+	// 收到一条未知消息(type 51)
 }
